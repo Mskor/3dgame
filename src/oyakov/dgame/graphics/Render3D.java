@@ -1,11 +1,13 @@
 package oyakov.dgame.graphics;
 
+import java.awt.image.DataBuffer;
 import java.util.Random;
 
-import oyakov.dgame.Game;
+import oyakov.dgame.CurrentModel;
+import oyakov.dgame.GameConveyor;
 import oyakov.dgame.input.Controller;
 
-public class Render3D extends Render {
+public class Render3D extends Render implements Engine{
 	
 	public double[] zBuffer;
 	private double renderDistance = 5000.0;
@@ -18,7 +20,7 @@ public class Render3D extends Render {
 		zBuffer = new double[width * height];
 	}
 
-	public void renderBounds(Game game) {
+	public void renderBounds(GameConveyor game) {
 		
 		double floorPosition = 8.0;
 		double ceilingPosition = 8.0;
@@ -86,6 +88,12 @@ public class Render3D extends Render {
 			
 			pixels[i] = r << 16 | g << 8 | b;
 	}
+	}
+
+	@Override
+	public void render(CurrentModel model, DataBuffer renderTarget) {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }

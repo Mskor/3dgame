@@ -30,16 +30,13 @@ public class Display extends Canvas implements Runnable{
 	private Screen screen;
 	private BufferedImage img;
 	private int[] pixels;
-	private Game game;
+	private GameConveyor game;
 	private InputHandler input;
-	private int newX = 0;
-	private int oldX = 0;
 	private int fps = 0;
 
 	public Display() {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
-		setPreferredSize(size);
-		game = new Game();
+		setPreferredSize(size);		
 		screen = new Screen(WIDTH, HEIGHT);
 		img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
@@ -48,6 +45,7 @@ public class Display extends Canvas implements Runnable{
 		addFocusListener(input);
 		addMouseListener(input);
 		addMouseMotionListener(input);
+		game = new GameConveyor(input, new CurrentModel());
 	}
 	
 	@Override
@@ -81,20 +79,6 @@ public class Display extends Canvas implements Runnable{
 			}
 			render();
 			frames++;
-			
-			newX = InputHandler.MouseX;
-			if(newX > oldX){
-				Controller.turnRight = true;				
-			}
-			if(newX < oldX){
-				Controller.turnLeft = true;				
-			}
-			if(newX == oldX){
-				Controller.turnLeft = false;
-				Controller.turnRight = false;				
-			}
-			oldX = newX;
-			
 		}
 	}
 	
@@ -124,7 +108,7 @@ public class Display extends Canvas implements Runnable{
 	}
 
 	private void tick() {
-		game.tick(input.key);		
+		game.calcNextTick();		
 	}
 
 	public synchronized void start() {

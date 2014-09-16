@@ -1,6 +1,6 @@
 package oyakov.dgame.graphics;
 
-import oyakov.dgame.Game;
+import oyakov.dgame.GameConveyor;
 
 public class Screen extends Render {
 	private Render3D render;
@@ -10,7 +10,7 @@ public class Screen extends Render {
 		render = new Render3D(width, height);
 	}
 
-	public void render(Game game) {
+	public void render(GameConveyor game) {
 		for (int i = 0; i < width * height; i++) {
 			pixels[i] = 0;
 		}		

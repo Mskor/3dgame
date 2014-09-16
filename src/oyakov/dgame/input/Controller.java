@@ -1,12 +1,15 @@
 package oyakov.dgame.input;
 
+import oyakov.dgame.CurrentModel;
+import oyakov.dgame.input.InputHandler.CurrentTickAction;
+
 public class Controller {
 	public double x, y, z, rotation, xa, za, rotationa;
 	public static boolean turnLeft = false;
 	public static boolean turnRight = false;
 	public static boolean walking = false;
 	
-	public void tick(boolean forward, boolean back, boolean left, boolean right, boolean jump, boolean crouch, boolean run) {
+	public void calcNextTick(CurrentTickAction cta) {
 		double rotationSpeed = 0.01;
 		double walkSpeed = 0.5;
 		double jumpHeight = 0.5;
@@ -14,37 +17,37 @@ public class Controller {
 		double zMove = 0;
 
 		walking = false;
-		if (forward) {
+		if (cta.forward) {
 			zMove++;
 			walking = true;
 		}
-		if (back) {
+		if (cta.back) {
 			zMove--;
 			walking = true;
 		}
-		if (left) {
+		if (cta.left) {
 			xMove--;
 			walking= true;
 		}
-		if (right) {
+		if (cta.right) {
 			xMove++;
 			walking= true;
 		}
-		if (turnLeft) {
+		if (cta.isTurningLeft) {
 			rotationa -= rotationSpeed;
 		}
-		if (turnRight) {
+		if (cta.isTurningRight) {
 			rotationa += rotationSpeed;
 		}
-		if(jump){
+		if(cta.jump){
 			y += jumpHeight;
-			run = false;
+			cta.run = false;
 		}
-		if(crouch){
+		if(cta.crouch){
 			y-=jumpHeight;
-			run = false;
+			cta.run = false;
 		}
-		if(run){
+		if(cta.run){
 			walkSpeed = 1;
 		}
 		
@@ -54,7 +57,7 @@ public class Controller {
 		x += xa;
 		y *= 0.90;
 		z += za;
-		xa *= 0.1;
+		xa *= 0.1;		
 		za *= 0.1;
 		rotation += rotationa;
 		rotationa *= 0.8;
