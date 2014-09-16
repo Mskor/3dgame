@@ -21,8 +21,8 @@ import oyakov.dgame.input.InputHandler;
 public class Display extends Canvas implements Runnable{
 	private static final long serialVersionUID = -7241599448401532735L;
 
-	public static final int WIDTH = 1200;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	public static final String title = "dgame 0.0.1";
 
 	private Thread thread;
@@ -113,9 +113,12 @@ public class Display extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(img, 0, 0, WIDTH + 10, HEIGHT + 10, null);
-		g.setFont(new Font("Buxton Sketch", 0, 50));
+		g.setFont(new Font("Buxton Sketch", 0, 20));
 		g.setColor(Color.YELLOW);
-		g.drawString("FPS: " + fps, 50, 100);
+		g.drawString("FPS: " + fps, 50, 50);
+		g.drawString(String.format("X: %1$5.2f", game.controls.x), 50, 80);
+		g.drawString(String.format("Z: %1$5.2f", game.controls.z), 50, 110);
+		g.drawString(String.format("Y: %1$5.2f", game.controls.y), 50, 140);
 		g.dispose();
 		bs.show();
 	}

@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import oyakov.dgame.input.Controller;
 
 
-public class Game {
+public class Game{
 	public long time;
 	public Controller controls;
 	

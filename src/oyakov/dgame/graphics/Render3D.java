@@ -10,13 +10,15 @@ public class Render3D extends Render {
 	public double[] zBuffer;
 	private double renderDistance = 5000.0;
 	Random random = new Random();
+	StaticLoader loader = new StaticLoader();
+	Render floorTexCache = loader.getResource("floor.png");
 	
 	public Render3D(int width, int heght) {
 		super(width, heght);
 		zBuffer = new double[width * height];
 	}
 
-	public void floor(Game game) {
+	public void renderBounds(Game game) {
 		
 		double floorPosition = 8.0;
 		double ceilingPosition = 8.0;
@@ -36,7 +38,7 @@ public class Render3D extends Render {
 			double z = (floorPosition  + game.controls.y + walkingShake)/ ceiling;
 			
 			if (ceiling < 0) {
-				z = (ceilingPosition - game.controls.y - walkingShake) / -ceiling;
+				z = (ceilingPosition - game.controls.y - walkingShake) / ceiling;
 			}			
 									
 			for (int x = 0; x < width; x++) {				
@@ -46,8 +48,8 @@ public class Render3D extends Render {
 				double yy = z * cosine - depth * sine;
 				int xPix = (int) (xx + sideMovement);
 				int yPix = (int) (yy + forwardMovement);
-				zBuffer[x + y * width] = z;
-				pixels[x + y * width] = Texture.floor.pixels[(xPix & 7) + (yPix & 7) * 8];				
+				zBuffer[x + y * width] = z;				
+				pixels[x + y * width] = floorTexCache.pixels[(xPix & 7) + (yPix & 7) * 8];				
 			}
 		}
 		
