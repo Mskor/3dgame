@@ -52,7 +52,8 @@ public class InputHandler implements UserInputListener{
 			cta.isTurningRight = true;			
 		else if(mouseDeltaX < 0)
 			cta.isTurningLeft = true;		
-		
+		rawInput.prevMouseX = rawInput.MouseX;		
+		System.out.println("Mouse X: " + rawInput.MouseX + " Mouse Y: " + rawInput.MouseY);
 		return cta;
 	}
 	
@@ -89,7 +90,7 @@ public class InputHandler implements UserInputListener{
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) {		
 		rawInput.MouseX = e.getX();
 		rawInput.MouseY = e.getY();
 		

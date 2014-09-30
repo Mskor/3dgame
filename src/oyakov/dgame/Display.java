@@ -21,8 +21,8 @@ import oyakov.dgame.input.InputHandler;
 public class Display extends Canvas implements Runnable{
 	private static final long serialVersionUID = -7241599448401532735L;
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 1000;
+	public static final int HEIGHT = 1000;
 	public static final String title = "dgame 0.0.1";
 
 	private Thread thread;
@@ -99,10 +99,7 @@ public class Display extends Canvas implements Runnable{
 		g.drawImage(img, 0, 0, WIDTH + 10, HEIGHT + 10, null);
 		g.setFont(new Font("Buxton Sketch", 0, 20));
 		g.setColor(Color.YELLOW);
-		g.drawString("FPS: " + fps, 50, 50);
-		g.drawString(String.format("X: %1$5.2f", game.controls.x), 50, 80);
-		g.drawString(String.format("Z: %1$5.2f", game.controls.z), 50, 110);
-		g.drawString(String.format("Y: %1$5.2f", game.controls.y), 50, 140);
+		g.drawString("FPS: " + fps, 50, 50);		
 		g.dispose();
 		bs.show();
 	}
@@ -133,12 +130,10 @@ public class Display extends Canvas implements Runnable{
 
 	public static void main(String args[]) {
 		BufferedImage cursor = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(0, 0), "blank");
 		Display game = new Display();
 		JFrame frame = new JFrame();
 		frame.add(game);
-		frame.setTitle(title);
-		frame.getContentPane().setCursor(blank);
+		frame.setTitle(title);		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
